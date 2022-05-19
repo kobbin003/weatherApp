@@ -6,7 +6,8 @@ import hbs from "hbs";
 import router from "./api.js";
 
 export const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+console.log("checking..", port);
 // app.engine('handlebars', hbs.engine);
 // const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -33,8 +34,6 @@ hbs.registerPartials(partialPath);
 
 //. routes
 app.get("/", (req, res) => {
-  const query = req.query.id;
-  console.log("query", query);
   res.render("index", { title: "Weather", name: "Kobin" });
 });
 
@@ -49,15 +48,18 @@ app.get("/*/*", (req, res) => {
   res.render("404_2", { title: "404", msg: "article not found tri" });
   // res.send('Page not found')
 });
-//.404
+
+//.routers
 app.use("/trial", router);
+
 app.use("/weather", router);
 
+//.404
 app.get("*", (req, res) => {
   res.render("404", { title: "404", msg: "page not found" });
   // res.send('404: page not found')
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Server is up on port ${port}`);
 });

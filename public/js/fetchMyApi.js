@@ -1,6 +1,7 @@
 const fetchMyApi = (location) => {
   console.log("fetching");
-  fetch(`http://localhost:3000/weather?address=${location}`)
+  // fetch(`http://localhost:3000/weather?address=${location}`)
+  fetch(`/weather?address=${location}`)
     .then((response) => {
       if (!response.ok) {
         console.log(response.error);
