@@ -14,8 +14,8 @@ window.onload = function (params) {
     const location = e.target.querySelector("#searchValue").value;
 
     //fetchMyApi
+    console.log("fetching my api",location);
     fetchMyApi(location);
-    // console.log("ll");
     // e.preventDefault();
   };
 };

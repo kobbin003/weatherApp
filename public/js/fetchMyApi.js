@@ -1,5 +1,7 @@
 const fetchMyApi = (location) => {
   console.log("fetching");
+  //? set the process.env.NODE_ENV in front end
+  // const server = process.env.NODE_ENV
   // fetch(`http://localhost:3000/weather?address=${location}`)
   fetch(`/weather?address=${location}`)
     .then((response) => {
