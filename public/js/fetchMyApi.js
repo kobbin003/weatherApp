@@ -23,7 +23,7 @@ const fetchMyApi = (location) => {
       document.querySelector("#weather-info").textContent = weatherString;
     })
     .catch((e) => {
-      console.log(e);
+      console.log('fail',e);
       document.querySelector("#weather-info").textContent =
         "Unable to find location. Try another search";
     });

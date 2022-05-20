@@ -16,6 +16,6 @@ window.onload = function (params) {
     //fetchMyApi
     console.log("fetching my api",location);
     fetchMyApi(location);
-    // e.preventDefault();
+    e.preventDefault();
   };
 };
