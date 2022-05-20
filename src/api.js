@@ -23,10 +23,10 @@ router.get("/", (req, res) => {
         data
       ) => {
         //destructuring;
-        const {
-          location: { name },
-          current: { temperature, weather_descriptions },
-        } = data;
+        // const {
+        //   location: { name },
+        //   current: { temperature, weather_descriptions },
+        // } = data;
 
         if (error) {
           console.log("1");
@@ -37,9 +37,9 @@ router.get("/", (req, res) => {
         } else {
           console.log("3  ");
           return res.send({
-            name,
-            temperature,
-            weather_descriptions,
+            name: data.location.name,
+            temperature: data.current.temperature,
+            weather_descriptions: data.current.weather_descriptions,
           });
         }
       }
