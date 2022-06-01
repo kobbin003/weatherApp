@@ -21,7 +21,7 @@ const viewsPath = path.join(__dirname, "../template/views");
 const partialPath = path.join(__dirname, "../template/partials");
 
 //. to serve static directory
-//[this is necessary for css and js files]
+//.[this is necessary for css and js files]
 app.use(express.static(directoryToServe));
 
 //.setup template engine and views location

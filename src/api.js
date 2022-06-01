@@ -2,53 +2,41 @@ import express from "express";
 import { weatherApi } from "./utils/config.js";
 import { weatherCode } from "./utils/weatherCode.js";
 const router = express.Router();
-const port = 3000;
 
 router.get("/", (req, res) => {
-  console.log("/weather accessed");
+  // console.log("/weather accessed");
   const address = req.query.address;
   if (!address) {
     return res.send({ errormsg: "address is required" });
   } else {
     const url = `http://api.weatherstack.com/current?access_key=${weatherApi}&query=${address}`;
-    weatherCode(
-      url,
-      (
-        error,
-        //?DESTRUCTURE AN ASYNCHRONOUS DATA??????????
-        // {
-        //   location: { name = "" } = {},
-        //   current: { temperature = "", weather_descriptions = "" } = {},
-        // } = {}
-        data
-      ) => {
-        //destructuring;
-        // const {
-        //   location: { name },
-        //   current: { temperature, weather_descriptions },
-        // } = data;
+    weatherCode(url)
+      .then((data) => {
+        console.log("success-app!");
 
-        if (error) {
-          console.log("1");
-          return res.send({ error });
-        } else if (data.error) {
-          console.log("2");
-          return res.send({ error: data?.error });
-        } else {
-          console.log("3  ");
-          return res.send({
-            name: data.location.name,
-            temperature: data.current.temperature,
-            weather_descriptions: data.current.weather_descriptions,
-          });
-        }
-      }
-    );
+        return res.send({
+          name: data.location.name,
+          temperature: data.current.temperature,
+          weather_descriptions: data.current.weather_descriptions,
+        });
+      })
+      .catch((error) => console.log("error-app", error));
+    // (async function noname() {
+    //   try {
+    //     const data = weatherCode(url);
+    //     console.log("success-app!", data);
+    //     //destructuring;
+    //     // const {
+    //     //   location: { name },
+    //     //   current: { temperature, weather_descriptions },
+    //     // } = data;
+    //     return res.send({...data});
+    //   } catch (error) {
+    //     console.log("error-app", error);
+    //   }
+    //   weatherCode(url).the
+    // })();
   }
 });
-
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}`);
-//   });
 
 export default router;
